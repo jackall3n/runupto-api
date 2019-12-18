@@ -9,6 +9,8 @@ services:
       - REDIS_URL=redis://run-up-redis:6379
     networks:
       - run-up-network
+    ports:
+    - "80:8080"
 
   run-up-redis:
     image: redis
