@@ -10,7 +10,6 @@ RUN yarn
 
 COPY . .
 
-
 EXPOSE 8080
 
-CMD ['PORT=8080', 'yarn', 'start']
+CMD ['yarn', 'start']

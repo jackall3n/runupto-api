@@ -19,7 +19,7 @@ const app = express();
 applyMiddleware(app, middleware);
 applyRoutes(app, routes);
 
-const { PORT = "3001", HOST = '127.0.0.1' } = process.env;
+const { PORT = "8080", HOST = '127.0.0.1' } = process.env;
 
 app.listen(parseInt(PORT), HOST, () => {
   console.log(`Up and running boyyy`, HOST, PORT)
