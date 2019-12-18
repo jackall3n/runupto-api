@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  run-up-api:
+    container_name: run-up-api
+    build: .
+    environment:
+      - PORT=8080
+      - REDIS_URL=redis://run-up-redis:6379
+    networks:
+      - run-up-network
+
+  run-up-redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - run-up-network
+
+networks:
+  run-up-network:
+    driver: bridge
