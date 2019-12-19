@@ -18,12 +18,13 @@ process.on("unhandledRejection", e => {
 applyMiddleware(app, middleware);
 applyRoutes(app, routes);
 
-const { PORT = "8080", HOST = '127.0.0.1', REDIS_URL } = process.env;
+const { PORT = "8080", REDIS_URL } = process.env;
 
-app.listen(parseInt(PORT), HOST, () => {
+const port = parseInt(PORT);
+
+app.listen(port, () => {
   console.log('Server started with configurations:', {
-    PORT,
-    HOST,
+    port,
     REDIS_URL
   });
 

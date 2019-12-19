@@ -8,5 +8,3 @@ COPY yarn.lock .
 RUN yarn
 
 COPY . .
-
-CMD yarn start
