@@ -7,7 +7,7 @@ services:
     command: yarn start
     environment:
       PORT: 7000
-      REDIS_URL: redis://run-up-cache:6379
+      REDIS_URL: redis://run-up-redis:6379
     ports:
       - "7000:7000"
     networks:
