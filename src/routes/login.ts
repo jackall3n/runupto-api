@@ -17,7 +17,7 @@ login.get('/login', async (req, res) => {
     params: {
       client_id: env.strava_client_id,
       client_secret: env.strava_client_secret,
-      grant_type: 'refresh_token',
+      grant_type: 'authorization_code',
       code
     },
     method: 'POST',
