@@ -2,7 +2,7 @@ import redis from "redis";
 
 import { App } from './app';
 
-const { REDIS_URL = 'redis://127.0.0.1:6379' } = process.env;
+const { REDIS_URL = 'redis://127.0.0.1:6969' } = process.env;
 
 export const connect = (app: App) => {
   try {
