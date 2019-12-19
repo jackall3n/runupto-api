@@ -4,7 +4,7 @@ import env from "../constants/env";
 
 const login = express.Router();
 
-const STRAVA_URL = 'https://www.strava.com/';
+const STRAVA_URL = 'https://www.strava.com';
 
 login.get('/auth', (req, res) => {
   res.redirect(`${STRAVA_URL}/oauth/authorize?client_id=40506&response_type=code&redirect_uri=http://142.93.33.162/login&approval_prompt=force&scope=activity:read_all,activity:write,profile:read_all`)
@@ -20,6 +20,7 @@ login.get('/login', async (req, res) => {
       grant_type: 'refresh_token',
       code
     },
+    method: 'POST',
     url: `${STRAVA_URL}/api/v3/oauth/token`
   });
 
