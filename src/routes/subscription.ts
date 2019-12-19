@@ -17,7 +17,7 @@ subscription.get('/queue', (req, res) => {
   }
 });
 
-subscription.post('/subscription', (req, res) => {
+subscription.post('/callback', (req, res) => {
   const { redis } = req.app.locals as App['locals'];
   const { event_time } = req.body;
 
