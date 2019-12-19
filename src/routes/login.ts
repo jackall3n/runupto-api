@@ -19,7 +19,8 @@ login.get('/login', async (req, res) => {
       client_secret: env.strava_client_secret,
       grant_type: 'refresh_token',
       code
-    }
+    },
+    url: `${STRAVA_URL}/api/v3/oauth/token`
   });
 
   console.log(response.data);
