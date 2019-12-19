@@ -3,14 +3,17 @@ import { App } from "../app";
 
 const subscription = express.Router();
 
-const SUBSCRIPTION_KEY = "subscription:update";
+const STRAVA_EVENTS_KEY = "strava:events";
 
 subscription.get('/queue', (req, res) => {
   const { redis } = req.app.locals as App['locals'];
 
   try {
-    redis.hgetall(SUBSCRIPTION_KEY, (e, subscriptions) => {
-      res.send(subscriptions)
+    redis.lrange(STRAVA_EVENTS_KEY, 0, -1, (e, events) => {
+
+      const updates = events.map((p: string) => JSON.parse(p)) as any[];
+
+      res.send(updates)
     });
   } catch (e) {
     res.send(e.message);
@@ -19,9 +22,8 @@ subscription.get('/queue', (req, res) => {
 
 subscription.post('/callback', (req, res) => {
   const { redis } = req.app.locals as App['locals'];
-  const { event_time, owner_id } = req.body;
 
-  redis.hset(SUBSCRIPTION_KEY, `${event_time}_${owner_id}`, JSON.stringify(req.body), (error) => {
+  redis.rpush(STRAVA_EVENTS_KEY, JSON.stringify(req.body), (error) => {
     res.status(error !== null ? 500 : 200).send();
   });
 });
