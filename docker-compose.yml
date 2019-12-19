@@ -5,20 +5,21 @@ services:
     container_name: run-up-api
     build: .
     environment:
-      - PORT=8080
+      - PORT=3031
       - REDIS_URL=redis://run-up-redis:6379
-    networks:
-      - run-up-network
     ports:
-    - "8080:80"
+    - "3031:3031"
+    depends_on:
+      - run-up-redis
 
   run-up-redis:
     image: redis
+    container_name: run-up-redis
     ports:
       - "6379:6379"
-    networks:
-      - run-up-network
+    volumes:
+      - redis-data:/data
 
-networks:
-  run-up-network:
-    driver: bridge
+
+volumes:
+  redis-data:
