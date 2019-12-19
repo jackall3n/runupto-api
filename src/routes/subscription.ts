@@ -19,9 +19,9 @@ subscription.get('/queue', (req, res) => {
 
 subscription.post('/callback', (req, res) => {
   const { redis } = req.app.locals as App['locals'];
-  const { event_time } = req.body;
+  const { event_time, owner_id } = req.body;
 
-  redis.hset(SUBSCRIPTION_KEY, event_time, JSON.stringify(req.body), (error) => {
+  redis.hset(SUBSCRIPTION_KEY, `${event_time}_${owner_id}`, JSON.stringify(req.body), (error) => {
     res.status(error !== null ? 500 : 200).send();
   });
 });
