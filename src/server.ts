@@ -22,5 +22,5 @@ applyRoutes(app, routes);
 app.listen(env.port, () => {
   console.log('started api');
 
-  connect(app);
+  app.locals.redis = connect(env.redis_url);
 });

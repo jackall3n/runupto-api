@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 
 services:
   run-up-api:
@@ -6,30 +6,13 @@ services:
     build: .
     command: yarn start
     environment:
-      PORT: 80
-      REDIS_URL: redis://run-up-redis:6379
+      PORT: 7000
+      REDIS_URL: redis://run-up-cache:6379
     ports:
-      - "80:80"
-    depends_on:
-      - run-up-redis
+      - "7000:7000"
     networks:
-      - run-up-network
-    links:
-      - run-up-redis
-
-  run-up-redis:
-    image: redis
-    container_name: run-up-redis
-    ports:
-      - "6969:6379"
-    volumes:
-      - redis-data:/data
-    networks:
-      - run-up-network
+      - cache_cache-network
 
 networks:
-  run-up-network:
-    driver: bridge
-
-volumes:
-  redis-data:
+  cache_cache-network:
+    external: true

@@ -1,11 +1,10 @@
-import redis from "redis";
+import redis, { RedisClient } from "redis";
 
-import { App } from './app';
-import env from "./constants/env";
+export const connect = (url: string) => {
+  let client: RedisClient;
 
-export const connect = (app: App) => {
   try {
-    const client = app.locals.redis = redis.createClient(env.redis_url);
+    client = redis.createClient(url);
 
     client.on('connect', () => {
       console.log('connected to redis')
@@ -16,5 +15,9 @@ export const connect = (app: App) => {
     });
   } catch (e) {
     console.error('redis error', e);
+
+    throw e;
   }
+
+  return client;
 };
