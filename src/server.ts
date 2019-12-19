@@ -1,3 +1,4 @@
+import env from "./constants/env";
 import middleware from './middleware';
 import routes from './routes';
 import applyMiddleware from "./utils/applyMiddleware";
@@ -18,15 +19,8 @@ process.on("unhandledRejection", e => {
 applyMiddleware(app, middleware);
 applyRoutes(app, routes);
 
-const { PORT = "8080", REDIS_URL } = process.env;
-
-const port = parseInt(PORT);
-
-app.listen(port, () => {
-  console.log('Server started with configurations:', {
-    port,
-    REDIS_URL
-  });
+app.listen(env.port, () => {
+  console.log('started api');
 
   connect(app);
 });

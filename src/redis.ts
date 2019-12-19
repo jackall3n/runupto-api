@@ -1,12 +1,11 @@
 import redis from "redis";
 
 import { App } from './app';
-
-const { REDIS_URL = 'redis://127.0.0.1:6969' } = process.env;
+import env from "./constants/env";
 
 export const connect = (app: App) => {
   try {
-    const client = app.locals.redis = redis.createClient(REDIS_URL);
+    const client = app.locals.redis = redis.createClient(env.redis_url);
 
     client.on('connect', () => {
       console.log('connected to redis')
