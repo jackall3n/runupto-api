@@ -26,4 +26,16 @@ subscription.post('/subscription', (req, res) => {
   });
 });
 
+subscription.get('/callback', (req, res) => {
+  const challenge = req.params['hub.challenge'];
+  const mode = req.params['hub.mode'];
+  const token = req.params['hub.verify_token'];
+
+  console.log('subscription', { challenge, mode, token });
+
+  res.json({
+    'hub.challenge': challenge
+  })
+});
+
 export default subscription;
