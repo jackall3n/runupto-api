@@ -10,7 +10,7 @@ login.get('/auth', (req, res) => {
   res.redirect(`${STRAVA_URL}/oauth/authorize?client_id=40506&response_type=code&redirect_uri=http://142.93.33.162/login&approval_prompt=force&scope=activity:read_all,activity:write,profile:read_all`)
 });
 
-login.get('/login', async (req, res) => {
+login.get('/auth', async (req, res) => {
   const { code } = req.query;
 
   const response = await axios({
