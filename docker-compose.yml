@@ -8,7 +8,6 @@ services:
     environment:
       PORT: 7000
       REDIS_URL: redis://run-up-redis:6379
-      PROD_REDIS_URL: redis://142.93.33.162:6379
     ports:
       - "7000:7000"
     networks:
